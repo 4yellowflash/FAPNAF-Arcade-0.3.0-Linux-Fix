@@ -78,5 +78,11 @@ Tested on **GE-Proton 11-12** (Linux x86_64).
 
 ---
 
+## Credits
+- **[nExysYT](https://github.com/nExysYT)** — testing, diagnostics, and repository maintenance
+- **Antigravity (Google DeepMind)** — Wine relay trace analysis and `wintrust.dll` shim implementation
+
+---
+
 ## Disclaimer
 This project contains no game files or proprietary Windows binaries. It is solely a Wine/Proton compatibility shim to allow legally owned Windows games to run on Linux. Licensed under the [MIT License](LICENSE).
