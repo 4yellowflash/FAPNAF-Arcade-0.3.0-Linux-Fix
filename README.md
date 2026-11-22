@@ -79,7 +79,7 @@ Tested on **GE-Proton 11-12** (Linux x86_64).
 ---
 
 ## Credits
-- **[nExysYT](https://github.com/nExysYT)** — testing, diagnostics, and repository maintenance
+- **[exys](https://github.com/4yellowflash)** — testing, diagnostics, and repository maintenance
 - **Antigravity (Google DeepMind)** — Wine relay trace analysis and `wintrust.dll` shim implementation
 
 ---
