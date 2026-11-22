@@ -22,11 +22,25 @@ When launching affected games under Wine or Proton, the game immediately exits w
 
 ---
 
+## Preparing 
+
+Download the source code from the **Releases** page and extract it.
+
+### Option 1: Building from Source
+
+Run this command inside the project folder (Requires MinGW-w64 package installed on your system `x86_64-w64-mingw32-gcc`):
+
+```bash
+x86_64-w64-mingw32-gcc -O2 -shared -o wintrust.dll wintrust_shim.c wintrust.def \
+  -nostartfiles -Wl,--entry,DllMain -lkernel32 -lcrypt32
+```
+### Option 2: Download pre-built (`wintrust.dll`)
+
+Download pre-built (`wintrust.dll`) from **Releases** page into the project folder.
+
+ > **Important:** Do **not** drop `wintrust.dll` into the game folder next to the `.exe`. Wine treats `wintrust.dll` as a `KnownDll` and will ignore copies outside `drive_c/windows/system32/`.
+
 ## Installation
-
-Download the latest release (`proton-wintrust-fix.zip`) from the **Releases** page and extract it.
-
-> **Important:** Do **not** drop `wintrust.dll` into the game folder next to the `.exe`. Wine treats `wintrust.dll` as a `KnownDll` and will ignore copies outside `drive_c/windows/system32/`.
 
 ### Option 1: Automatic installer (recommended)
 Run `install.sh` with the path to your Wine or Proton prefix:
@@ -41,7 +55,7 @@ chmod +x install.sh
    ```
    <prefix>/drive_c/windows/system32/
    ```
-2. Rename or delete the existing `wintrust.dll` (usually a symlink to Proton's copy).
+2. Rename, backup or delete the existing `wintrust.dll` (usually a symlink to Proton's copy).
 3. Copy `wintrust.dll` from this release into `<prefix>/drive_c/windows/system32/`.
 
 ### Step 2: Enable the DLL override
@@ -57,22 +71,15 @@ Set `WINEDLLOVERRIDES="wintrust=n"` in your launcher:
 - **Heroic:** Game **Settings → Advanced → Environment Variables**:
   - Variable: `WINEDLLOVERRIDES`
   - Value: `wintrust=n`
-
+- **Bottles:** Open your bottle → **Settings → DLL Overrides**:
+  - New Override: `wintrust`
+  - Set to: `Native, then Builtin`
 ---
 
 ## Uninstall
 Delete `<prefix>/drive_c/windows/system32/wintrust.dll`, rename `wintrust.dll.bak` back to `wintrust.dll`, and remove the `WINEDLLOVERRIDES` option.
 
 ---
-
-## Building from Source
-
-Requires MinGW-w64 (`x86_64-w64-mingw32-gcc`):
-
-```bash
-x86_64-w64-mingw32-gcc -O2 -shared -o wintrust.dll wintrust_shim.c wintrust.def \
-  -nostartfiles -Wl,--entry,DllMain -lkernel32 -lcrypt32
-```
 
 Tested on **GE-Proton 11-12** (Linux x86_64).
 
